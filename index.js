@@ -1,32 +1,36 @@
 const { Telegraf } = require('telegraf');
-
-// DDOS Prevention
-const chatTimeouts = new Map();
-
-// Callback Delay
-const callBackTimeouts = new Map();
-
-// Define the rate limiting options
-const opts = {
-  points: 1, // Number of points (requests) allowed
-  duration: 1, // Time duration in seconds
-};
-
-// Create a rate limiter instance
 const { RateLimiterMemory } = require('rate-limiter-flexible');
-const rateLimiter = new RateLimiterMemory(opts); 
-const callbackLimiter = new RateLimiterMemory(opts); 
-
-// Load environment variables from .env file
 require('dotenv').config();
 
-apiToken = process.env.API_TOKEN_DEV;
+// Telegram bot API token
+const apiToken = process.env.API_TOKEN_DEV;
 
-bot = new Telegraf(apiToken, {
-      telegram: { },
-  });
+// Instantiate Telegraf bot
+const bot = new Telegraf(apiToken);
+
+// Define rate limiting options
+const rateLimiterOpts = {
+  points: 5,  // Number of points
+  duration: 1, // Per second(s)
+};
+
+// Initialize rate limiter
+const rateLimiter = new RateLimiterMemory(rateLimiterOpts);
+
+// Create a Map to store timeout data
+const chatTimeouts = new Map();
 
 bot.launch();
+
+bot.on('callback_query', async (ctx) => {
+
+  if (await limitExceeded(ctx, chatId)) { return; }
+
+  ctx.reply("Continue Your Application Development ")
+
+
+}
+
 
 //==============
 //  DDOS Check
