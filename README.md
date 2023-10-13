@@ -52,7 +52,9 @@ kindly give recognition by mentioning **MrBunnyGithub** and linking back to this
 If you’d like to mention this work in a publication or post, please reference:
 
 ```
-Telegram Bot with DDoS Prevention by MrBunnyGithub, accessed on [date], available at: https://github.com/MrBunnyGithub/telegram-bot-ddos-prevention.
+Telegram Bot with DDoS Prevention by MrBunnyGithub, 
+accessed on [date], available at: 
+https://github.com/MrBunnyGithub/telegram-bot-ddos-prevention.
 ```
 
 ### Connect with Me
